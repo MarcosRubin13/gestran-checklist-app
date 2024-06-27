@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklistService } from '../services/checklist.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ChecklistService, Checklist } from '../services/checklist.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checklist',
   templateUrl: './checklist.component.html',
-  styleUrls: ['./checklist.component.css']
+  styleUrls: ['./checklist.component.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule]
 })
 export class ChecklistComponent implements OnInit {
-  checklists: any[] = [];
+  checklists: Checklist[] = [];
 
-  constructor(
-    private checklistService: ChecklistService,
-    private toastr: ToastrService
-  ) { }
+  constructor(private checklistService: ChecklistService, private toastr: ToastrService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadChecklists();
   }
 
@@ -32,10 +33,10 @@ export class ChecklistComponent implements OnInit {
 
   createChecklist() {
     const newChecklist = {
-      usuario: 'user1',
-      tipo: 'SAIDA',
-      placa: 'ABC-2A12',
-      motorista: 'Marcos'
+        usuario: 'user1',
+        tipo: 'SAIDA',
+        placa: 'ABC-2A12',
+        motorista: 'Marcos'
     };
     this.checklistService.createChecklist(newChecklist).subscribe(
       response => {

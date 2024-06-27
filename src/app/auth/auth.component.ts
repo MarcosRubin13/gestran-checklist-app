@@ -7,10 +7,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class AuthComponent {
   username: string = '';
@@ -31,7 +31,7 @@ export class AuthComponent {
     this.authService.login(this.username, this.password).subscribe(
       response => {
         this.toastr.success('Login realizado com sucesso', 'Sucesso');
-        this.router.navigate(['/checklists']);
+        this.router.navigate(['/checklist']);
       },
       error => {
         this.toastr.error('Usuário ou senha inválidos', 'Erro');

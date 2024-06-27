@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 
 export interface ChecklistItem {
   id: number;
@@ -36,7 +37,15 @@ export class ChecklistService {
   }
 
   getChecklists(): Observable<Checklist[]> {
-    return this.http.get<Checklist[]>(this.apiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<{ success: boolean, data: Checklist[] }>(this.apiUrl, { headers: this.getAuthHeaders() }).pipe(
+      map(response => {
+        if (response.success) {
+          return response.data;
+        } else {
+          throw new Error('Failed to load checklists');
+        }
+      })
+    );
   }
 
   getChecklistById(id: number): Observable<Checklist> {
@@ -61,6 +70,5 @@ export class ChecklistService {
 
   setChecklistToAguardandoFinalizacao(id: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/status/aguardando-finalizacao`, { id }, { headers: this.getAuthHeaders() });
-  }
 }
-
+}

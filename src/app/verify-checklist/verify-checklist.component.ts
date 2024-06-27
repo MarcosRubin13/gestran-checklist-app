@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChecklistService, ChecklistItem } from '../services/checklist.service';
 import { ToastrService } from 'ngx-toastr';
@@ -6,8 +8,11 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-verify-checklist',
   templateUrl: './verify-checklist.component.html',
-  styleUrls: ['./verify-checklist.component.css']
+  styleUrls: ['./verify-checklist.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule] // Importando CommonModule e FormsModule
 })
+
 export class VerifyChecklistComponent implements OnInit {
   checklistId: number;
   items: ChecklistItem[] = [];
