@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Verificação de Itens do Checklist</h2>
+    <div *ngIf="items.length > 0; else noItems">
+      <div *ngIf="currentIndex < items.length; else allItemsVerified">
+        <h3>{{ items[currentIndex].item }}</h3>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" [(ngModel)]="items[currentIndex].verificado">
+            Confirmar
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="observacao">Observação:</label>
+          <textarea id="observacao" class="form-control" [(ngModel)]="items[currentIndex].observacao"></textarea>
+        </div>
+        <button class="btn btn-primary" (click)="verifyItem()">Próximo</button>
+      </div>
+    </div>
+    <ng-template #noItems>
+      <p>Nenhum item para verificar.</p>
+    </ng-template>
+    <ng-template #allItemsVerified>
+      <p>Todos os itens foram verificados.</p>
+    </ng-template>
+  </div>
+  

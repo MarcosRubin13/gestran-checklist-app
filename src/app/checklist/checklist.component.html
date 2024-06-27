@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Checklists</h2>
+    <button class="btn btn-primary" (click)="createChecklist()">Criar Checklist</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Usuário</th>
+          <th>Etapa</th>
+          <th>Data Cadastro</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let checklist of checklists">
+          <td>{{ checklist.id }}</td>
+          <td>{{ checklist.usuario }}</td>
+          <td>{{ checklist.etapa }}</td>
+          <td>{{ checklist.dataCadastro | date: 'short' }}</td>
+          <td>
+            <button class="btn btn-success" (click)="startChecklist(checklist.id)" [disabled]="checklist.etapa === 'INICIADO'">Iniciar</button>
+            <a [routerLink]="['/checklists', checklist.id, 'verify']" class="btn btn-primary" [ngClass]="{'disabled-link': checklist.etapa !== 'INICIADO'}">Verificar Itens</a>
+            <button class="btn btn-danger" (click)="finalizeChecklist(checklist.id)" [disabled]="checklist.etapa !== 'INICIADO'">Finalizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
