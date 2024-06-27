@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../services/auth.service';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,11 +18,11 @@ export class AuthComponent {
 
   constructor(
     private authService: AuthService,
-    private toastr: ToastrService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
-  onSubmit() {
+  login() {
     if (!this.username || !this.password) {
       this.toastr.error('Todos os campos são obrigatórios', 'Erro');
       return;

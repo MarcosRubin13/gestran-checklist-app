@@ -5,30 +5,28 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
+import { AppComponent } from './app.component';
 import { ChecklistComponent } from './checklist/checklist.component';
 import { VerifyChecklistComponent } from './verify-checklist/verify-checklist.component';
 import { AuthService } from './services/auth.service';
 import { ChecklistService } from './services/checklist.service';
 import { AuthInterceptor } from './auth.interceptor';
-import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
     AuthComponent,
     ChecklistComponent,
     VerifyChecklistComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    AppRoutingModule
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -39,6 +37,6 @@ import { AppRoutingModule } from './app-routing.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
